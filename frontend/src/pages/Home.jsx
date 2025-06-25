@@ -196,7 +196,7 @@ const Home = () => {
             </div>
             <div>
               <h1 className="text-lg font-semibold text-gray-800">AI Assistant</h1>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500"><span className="inline-block h-3 w-3 rounded-full border-2 border-white bg-green-600"></span>
                 {isTyping ? "Typing..." : "Online"}
               </p>
             </div>

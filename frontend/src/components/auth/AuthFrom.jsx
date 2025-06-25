@@ -1,6 +1,6 @@
  import { Eye, EyeOff, Mail, Lock, User, AlertCircle } from 'lucide-react';
 
- const LoadingButton = ({ isLoading, onClick, children, className = "" }) => {
+const LoadingButton = ({ isLoading, onClick, children, className = "" }) => {
   return (
     <button
       type="button"
@@ -64,9 +64,10 @@ const InputField = ({
       )}
     </div>
   );
-}; 
+};
 
- export const AuthForm = ({ 
+
+export  const AuthForm = ({ 
   isLogin, 
   formData, 
   errors, 
