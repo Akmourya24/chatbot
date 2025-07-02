@@ -10,6 +10,8 @@ const Home = () => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [showWelcomeScreen, setShowWelcomeScreen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const messagesEndRef = useRef(null);
   const chatContainerRef = useRef(null);
 
@@ -28,7 +30,7 @@ const Home = () => {
       setInput("");
       setIsLoading(false);
       setIsTyping(false);
-      
+
       // Add welcome message after clearing
       setTimeout(() => {
         setMessages([{
@@ -148,7 +150,8 @@ const Home = () => {
     }
   }, []);
 
-  const WelcomeScreen = () => (
+  // WelcomeScreen component with Ask Any Question handler
+  const WelcomeScreen = ({ onAskAnyQuestion }) => (
     <div className="flex-1 flex items-center justify-center p-8">
       <div className="text-center max-w-md">
         <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
@@ -161,7 +164,10 @@ const Home = () => {
           Start a conversation with your AI assistant. Ask questions, share images, or record voice messages!
         </p>
         <div className="grid grid-cols-1 gap-4 text-left">
-          <div className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
+          <div
+            className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg cursor-pointer"
+            onClick={() => setShowWelcomeScreen(false)}
+          >
             <Sparkles className="text-blue-500" size={20} />
             <span className="text-sm text-gray-700">Ask any question</span>
           </div>
@@ -179,83 +185,108 @@ const Home = () => {
   );
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
-      {/* Left Sidebar - Pass messages and ChatScreen function */}
-      <ChatBar 
-        message={messages} 
-        ChatScreen={handleChatScreenAction}
-      />
+    <div className="flex min-h-screen bg-gray-50 relative">
 
-      {/* Right Chat Area */}
-      <div className="flex-1 flex flex-col bg-white shadow-sm">
+  {/* Sidebar - Show/Hide via sidebarOpen */}
+  <div className={`${sidebarOpen ? 'w-64' : 'w-0'} transition-all duration-300 overflow-hidden`}>
+    {sidebarOpen && (
+      <ChatBar
+        message={messages}
+        ChatScreen={handleChatScreenAction}
+        WelcomeScreen={WelcomeScreen}
+        onShowWelcomeScreen={() => setShowWelcomeScreen(true)}
+      />
+    )}
+  </div>
+
+    {/* Toggle Button – Hamburger when closed, Cancel when open */}
+<div className="fixed top-4 left-1 z-50">
+  {!sidebarOpen ? (
+   
+    <button
+      onClick={() => setSidebarOpen(true)}
+      className="p-2 bg-white border rounded-md shadow-md"
+    >
+      {/* Hamburger Icon */}
+      <div className="w-5 h-0.5 bg-gray-800 mb-1" />
+      <div className="w-5 h-0.5 bg-gray-800 mb-1" />
+      <div className="w-5 h-0.5 bg-gray-800" />
+    </button>
+  ) : (
+    <button
+      onClick={() => setSidebarOpen(false)}
+      className="p-2 relative left-48 rounded-md shadow-md text-gray-800 font-bold"
+    >
+      ✕
+    </button>
+  )}
+</div>
+
+
+      {/* Main Content - Always takes remaining width */}
+      <div className="flex-1 flex flex-col ml-12 bg-white shadow-sm transition-all duration-300">
         {/* Header */}
-        <div className="border-b border-gray-200 p-4 bg-white">
+        <div className="border-b border-gray-200 p-4 bg-white pl-4">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
               <Bot size={20} className="text-white" />
             </div>
             <div>
               <h1 className="text-lg font-semibold text-gray-800">AI Assistant</h1>
-              <p className="text-sm text-gray-500"><span className="inline-block h-3 w-3 rounded-full border-2 border-white bg-green-600"></span>
+              <p className="text-sm text-gray-500">
+                <span className="inline-block h-3 w-3 rounded-full border-2 border-white bg-green-600 mr-1"></span>
                 {isTyping ? "Typing..." : "Online"}
               </p>
             </div>
           </div>
         </div>
 
-        {/* Messages Area */}
-        <div
-          ref={chatContainerRef}
-          className="flex-1 overflow-y-auto bg-gradient-to-b from-gray-50 to-white scroll-smooth"
-          style={{ maxHeight: 'calc(100vh - 200px)' }}
-        >
-          {messages.length === 0 ? (
-            <WelcomeScreen />
-          ) : (
-            <div className="p-4 space-y-4">
-              {messages.map((msg) => (
-                <MessageBubble
-                  key={msg.id || msg.timestamp}
-                  sender={msg.sender}
-                  message={msg.message}
-                  timestamp={msg.timestamp}
-                  images={msg.images}
-                  audioUrl={msg.audioUrl}
-                />
-              ))}
-
-              {/* Typing Indicator */}
-              {isTyping && (
-                <MessageBubble
-                  sender="ai"
-                  message=""
-                  isTyping={true}
-                />
-              )}
-
-              {/* Scroll anchor */}
-              <div ref={messagesEndRef} />
+        {/* Main Content: Chat or Welcome Screen */}
+        {showWelcomeScreen ? (
+          <WelcomeScreen onAskAnyQuestion={() => setShowWelcomeScreen(false)} />
+        ) : (
+          <>
+            <div
+              ref={chatContainerRef}
+              className="flex-1 overflow-y-auto bg-gradient-to-b from-gray-50 to-white scroll-smooth"
+              style={{ maxHeight: 'calc(100vh - 200px)' }}
+            >
+              <div className="p-4 space-y-4">
+                {messages.map((msg) => (
+                  <MessageBubble
+                    key={msg.id || msg.timestamp}
+                    sender={msg.sender}
+                    message={msg.message}
+                    timestamp={msg.timestamp}
+                    images={msg.images}
+                    audioUrl={msg.audioUrl}
+                  />
+                ))}
+                {isTyping && <MessageBubble sender="ai" message="" isTyping />}
+                <div ref={messagesEndRef} />
+              </div>
             </div>
-          )}
-        </div>
 
-        {/* Input Area */}
-        <InputBox
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onSend={handleSend}
-          onImageSelect={handleImageSelect}
-          onVoiceMessage={handleVoiceMessage}
-          disabled={isLoading}
-          placeholder={
-            isLoading
-              ? "AI is thinking..."
-              : "Type your message, add images, or record voice..."
-          }
-        />
+            <InputBox
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onSend={handleSend}
+              onImageSelect={handleImageSelect}
+              onVoiceMessage={handleVoiceMessage}
+              disabled={isLoading}
+              placeholder={
+                isLoading
+                  ? "AI is thinking..."
+                  : "Type your message, add images, or record voice..."
+              }
+            />
+          </>
+        )}
       </div>
     </div>
+
   );
+
 };
 
 export default Home;
