@@ -99,7 +99,10 @@ ChatBot/
 
 ## Screenshots
 
-> _Add screenshots of your app UI here!_
+> ## Screenshots
+
+![ChatBot Screenshot](./frontend/public/screenshot1.png)
+![ChatBot Screenshot](./frontend/public/screenshot2.png)
 
 ---
 
