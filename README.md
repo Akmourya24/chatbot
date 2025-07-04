@@ -1,16 +1,16 @@
-# OpenBot - AI Chatbot Web App
+# ChatBot - AI Chatbot Web App
 
-OpenBot is a modern AI chatbot web application built with React.js (frontend) and Node.js/Express (backend). It features user authentication, chat history, image and voice message support, and integrates with the Gemini AI API for intelligent responses.
+ChatBot is a modern AI chatbot web application built with React.js (frontend) and Node.js/Express (backend). It features chat history, image and voice message support, and integrates with the Gemini AI API for intelligent responses.
 
 ---
 
 ## Features
 
 - 💬 **AI Chat**: Chat with an AI assistant powered by Gemini AI.
-- 🖼️ **Image Support**: Upload images for analysis (demo).
-- 🎤 **Voice Messages**: Record and send voice messages (demo).
+- 🖼️ **Image Support**: Upload images for analysis (Coming Soon).
+- 🎤 **Voice Messages**: Record and send voice messages (Coming Soon).
 - 🕒 **Chat History**: View and manage recent chats.
-- 🔐 **User Authentication**: Register, login, and logout (demo or real backend).
+- 🔐 **User Authentication**: Register, login, and logout (**Coming Soon**).
 - 🌙 **Modern UI**: Responsive, clean, and mobile-friendly design using Tailwind CSS.
 - ⚡ **Fast**: Built with Vite for instant reloads and fast builds.
 
@@ -19,9 +19,9 @@ OpenBot is a modern AI chatbot web application built with React.js (frontend) an
 ## Tech Stack
 
 - **Frontend**: React.js, Tailwind CSS, Vite
-- **Backend**: Node.js, Express.js, MongoDB (Mongoose)
+- **Backend**: Node.js, Express.js, MongoDB (Mongoose) (**Coming Soon**)
 - **AI Integration**: Gemini AI API (Google Generative AI)
-- **Authentication**: JWT, bcrypt (backend), demo mode (frontend)
+- **Authentication**: JWT, bcrypt (**Coming Soon**)
 - **Other**: Axios, Lucide React Icons
 
 ---
@@ -36,11 +36,13 @@ OpenBot is a modern AI chatbot web application built with React.js (frontend) an
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/openbot.git
-cd openbot
+git clone https://github.com/yourusername/ChatBot.git
+cd ChatBot
 ```
 
 ### 2. Setup Backend
+
+> ⚠️ **Backend and authentication are not implemented at this time. These features are coming soon!**
 
 ```bash
 cd backend
@@ -59,7 +61,7 @@ npm run dev
 ```
 
 - Frontend runs on [http://localhost:5173](http://localhost:5173)
-- Backend runs on [http://localhost:5000](http://localhost:5000)
+- Backend runs on [http://localhost:5000](http://localhost:5000) (**Coming Soon**)
 
 ---
 
@@ -79,7 +81,7 @@ ORIGIN=http://localhost:5173
 ## Folder Structure
 
 ```
-openbot/
+ChatBot/
   backend/
     controller/
     models/
@@ -110,7 +112,7 @@ MIT
 ## Credits
 
 - [Google Gemini AI](https://ai.google.dev/)
--[Vite](https://vitejs.dev/)
+- [Vite](https://vitejs.dev/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Lucide Icons](https://lucide.dev/)
 
