@@ -1,80 +1,119 @@
-# chatbot
+# OpenBot - AI Chatbot Web App
 
-# AI Chat Assistant
+OpenBot is a modern AI chatbot web application built with React.js (frontend) and Node.js/Express (backend). It features user authentication, chat history, image and voice message support, and integrates with the Gemini AI API for intelligent responses.
 
-This is a React-based AI chat application that leverages Google's Gemini AI API to create an interactive chat experience. The application allows users to have text-based conversations with the AI assistant.
+---
 
 ## Features
 
-- Modern, responsive UI designed with Tailwind CSS
-- Real-time chat interface
-- Support for multiple Gemini AI models
-- Secure API key management
-- Message history display with timestamps
-- Loading indicators for feedback during AI response generation
+- 💬 **AI Chat**: Chat with an AI assistant powered by Gemini AI.
+- 🖼️ **Image Support**: Upload images for analysis (demo).
+- 🎤 **Voice Messages**: Record and send voice messages (demo).
+- 🕒 **Chat History**: View and manage recent chats.
+- 🔐 **User Authentication**: Register, login, and logout (demo or real backend).
+- 🌙 **Modern UI**: Responsive, clean, and mobile-friendly design using Tailwind CSS.
+- ⚡ **Fast**: Built with Vite for instant reloads and fast builds.
 
-## Setup Instructions
+---
+
+## Tech Stack
+
+- **Frontend**: React.js, Tailwind CSS, Vite
+- **Backend**: Node.js, Express.js, MongoDB (Mongoose)
+- **AI Integration**: Gemini AI API (Google Generative AI)
+- **Authentication**: JWT, bcrypt (backend), demo mode (frontend)
+- **Other**: Axios, Lucide React Icons
+
+---
+
+## Getting Started
 
 ### Prerequisites
 
-- Node.js (v16 or later)
-- NPM (v8 or later)
-- A Google Gemini API key
+- Node.js (v18+ recommended)
+- npm or yarn
 
-### Installation
+### 1. Clone the Repository
 
-1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/ai-chat-assistant.git
-cd ai-chat-assistant
+git clone https://github.com/yourusername/openbot.git
+cd openbot
 ```
 
-2. Install dependencies:
+### 2. Setup Backend
+
 ```bash
+cd backend
 npm install
+# Create a .env file with your MongoDB URI and Gemini API key
+cp .env.example .env
+npm run dev
 ```
 
-3. Start the development server:
+### 3. Setup Frontend
+
 ```bash
-npm start
+cd ../frontend
+npm install
+npm run dev
 ```
 
-4. Open [http://localhost:5000](http://localhost:5000) in your browser to view the application.
+- Frontend runs on [http://localhost:5173](http://localhost:5173)
+- Backend runs on [http://localhost:5000](http://localhost:5000)
 
-### Using the Application
+---
 
-1. When you first open the application, you'll be prompted to enter your Gemini API key.
-2. After connecting with your API key, you can start chatting with the AI assistant.
-3. You can select different Gemini models from the dropdown menu in the header.
-4. The chat history is maintained during your session.
+## Environment Variables
 
-## Getting a Gemini API Key
+**Backend (`backend/.env`):**
+```
+MONGODB_URI=your_mongodb_connection_string
+GEMINI_API_KEY=your_gemini_api_key
+ACCESS_TOKEN_SECRET=your_jwt_secret
+REFRESH_TOKEN_SECRET=your_jwt_refresh_secret
+ORIGIN=http://localhost:5173
+```
 
-To use this application, you'll need a Google Gemini API key:
+---
 
-1. Visit [Google AI Studio](https://ai.google.dev/)
-2. Create or sign in to your Google account
-3. Get an API key from the API section
-4. Use this key when prompted by the application
+## Folder Structure
 
-## Technology Stack
+```
+openbot/
+  backend/
+    controller/
+    models/
+    routes/
+    ...
+  frontend/
+    src/
+      components/
+      pages/
+      api/
+      ...
+```
 
-- React 18
-- Google Gemini AI API (@google/genai)
-- Tailwind CSS for styling
-- LocalStorage for API key persistence
+---
 
-## Security Note
+## Screenshots
 
-The application stores your API key in your browser's local storage for convenience. This means you don't have to re-enter it each time you use the app, but it also means anyone with access to your browser could potentially access your API key. If you're concerned about security, you may want to clear your browser's local storage after using the application.
+> _Add screenshots of your app UI here!_
 
-## Customization
-
-You can customize the appearance and behavior of the application by modifying the source code. The main components are:
-
-- `src/App.jsx`: The main application component
-- `src/index.css`: Tailwind CSS imports and custom styles
+---
 
 ## License
 
 MIT
+
+---
+
+## Credits
+
+- [Google Gemini AI](https://ai.google.dev/)
+-[Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Lucide Icons](https://lucide.dev/)
+
+---
+
+**Made with ❤️ by [Alok Mourya]**
