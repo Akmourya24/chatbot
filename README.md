@@ -101,10 +101,12 @@ ChatBot/
 
 > ## Screenshots
 
-![ChatBot Screenshot](./frontend/public/screenshot1.png)
-![ChatBot Screenshot](./frontend/public/screenshot2.png)
+![ChatBot Screenshot](./frontend/public/Image/Screenshot1.png)
+![ChatBot Screenshot](./frontend/public/Image/Screenshot2.png)
+
 
 ---
+
 
 ## License
 
